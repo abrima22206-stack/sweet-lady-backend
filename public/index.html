@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Lady — Massothérapie &amp; Esthétique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose-pale: #f4dedb;
+    --rose-pale-2: #eec9c4;
+    --beige: #efe6d8;
+    --beige-clair: #faf6ee;
+    --vert-foret: #33473a;
+    --vert-foret-2: #4f6b54;
+    --vert-foret-3: #2a3a30;
+    --texte: #3a332c;
+    --blanc: #fffdfa;
+    --ombre: 0 10px 30px rgba(51,71,58,0.10);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Work Sans', sans-serif;
+    color:var(--texte);
+    background:var(--beige-clair);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand{ font-family:'Fraunces', serif; font-weight:500; letter-spacing:0.01em; }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .container{ max-width:1120px; margin:0 auto; padding:0 24px; }
+  section{ padding:96px 0; }
+  .eyebrow{
+    text-transform:uppercase; letter-spacing:0.18em; font-size:0.72rem;
+    color:var(--vert-foret-2); font-weight:600; margin-bottom:14px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(250,246,238,0.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(51,71,58,0.08);
+  }
+  .nav-wrap{ display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1120px; margin:0 auto; }
+  .brand{ font-size:1.5rem; color:var(--vert-foret); display:flex; align-items:center; gap:8px;}
+  .brand svg{width:26px; height:26px;}
+  nav ul{ list-style:none; display:flex; gap:36px; }
+  nav a{ font-size:0.92rem; font-weight:500; color:var(--vert-foret-3); position:relative; padding:4px 0;}
+  nav a:after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--vert-foret); transition:width .25s ease;}
+  nav a:hover:after{ width:100%; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--vert-foret); color:var(--blanc); border:none;
+    padding:13px 28px; border-radius:999px; font-family:'Work Sans';
+    font-size:0.92rem; font-weight:600; cursor:pointer; transition:transform .2s ease, background .2s ease;
+  }
+  .btn:hover{ background:var(--vert-foret-3); transform:translateY(-1px); }
+  .btn-outline{
+    background:transparent; border:1.5px solid var(--vert-foret); color:var(--vert-foret);
+  }
+  .btn-outline:hover{ background:var(--vert-foret); color:var(--blanc); }
+  .menu-toggle{ display:none; background:none; border:none; font-size:1.6rem; color:var(--vert-foret); cursor:pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background: radial-gradient(120% 100% at 15% 0%, var(--rose-pale) 0%, var(--beige) 55%, var(--beige-clair) 100%);
+    padding:110px 0 80px;
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:center; }
+  .hero h1{ font-size:clamp(2.4rem, 4.6vw, 3.6rem); color:var(--vert-foret-3); line-height:1.1; margin-bottom:22px; }
+  .hero h1 em{ font-style:italic; color:var(--vert-foret-2); }
+  .hero p{ font-size:1.08rem; color:#5a5148; max-width:480px; margin-bottom:34px; }
+  .hero-cta{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero-art{ position:relative; height:420px; }
+  .branch{ position:absolute; }
+
+  /* ---------- Section headings ---------- */
+  .section-head{ text-align:center; max-width:600px; margin:0 auto 56px; }
+  .section-head h2{ font-size:clamp(1.9rem, 3vw, 2.5rem); color:var(--vert-foret-3); }
+  .section-head p{ color:#5a5148; margin-top:12px; }
+
+  .divider{ display:flex; justify-content:center; margin:0; }
+  .divider svg{ width:140px; height:28px; opacity:0.65; }
+
+  /* ---------- Services ---------- */
+  .services-band{ background:var(--beige); }
+  .service-tabs{ display:flex; justify-content:center; gap:12px; margin-bottom:48px; flex-wrap:wrap; }
+  .tab-btn{
+    padding:10px 22px; border-radius:999px; border:1.5px solid var(--vert-foret-2);
+    background:transparent; color:var(--vert-foret-2); font-family:'Work Sans'; font-weight:600;
+    font-size:0.88rem; cursor:pointer; transition:all .2s ease;
+  }
+  .tab-btn.active, .tab-btn:hover{ background:var(--vert-foret-2); color:var(--blanc); }
+  .service-group{ display:none; }
+  .service-group.active{ display:block; }
+  .service-list{ display:flex; flex-direction:column; gap:0; background:var(--blanc); border-radius:20px; box-shadow:var(--ombre); overflow:hidden; }
+  .service-row{
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    padding:26px 32px; border-bottom:1px solid rgba(51,71,58,0.08);
+  }
+  .service-row:last-child{ border-bottom:none; }
+  .service-info h3{ font-size:1.15rem; color:var(--vert-foret-3); font-weight:500; margin-bottom:5px; }
+  .service-info p{ font-size:0.9rem; color:#786f63; }
+  .service-price{ text-align:right; white-space:nowrap; }
+  .service-price .price{ font-family:'Fraunces'; font-size:1.25rem; color:var(--vert-foret); }
+  .service-price .duree{ font-size:0.8rem; color:#8a8177; }
+
+  /* ---------- Produits ---------- */
+  .product-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
+  .product-card{
+    background:var(--blanc); border-radius:18px; padding:28px; box-shadow:var(--ombre);
+    border:1px solid rgba(51,71,58,0.06); transition:transform .25s ease;
+  }
+  .product-card:hover{ transform:translateY(-4px); }
+  .product-icon{
+    width:52px; height:52px; border-radius:14px; background:var(--rose-pale);
+    display:flex; align-items:center; justify-content:center; margin-bottom:18px;
+  }
+  .product-card h3{ font-size:1.05rem; color:var(--vert-foret-3); margin-bottom:8px; font-weight:500;}
+  .product-card p{ font-size:0.88rem; color:#786f63; margin-bottom:16px; min-height:42px;}
+  .product-card .price{ font-family:'Fraunces'; color:var(--vert-foret); font-size:1.1rem; }
+
+  /* ---------- Réservation ---------- */
+  .booking{ background:linear-gradient(180deg, var(--beige-clair), var(--rose-pale) 140%); }
+  .booking-wrap{ display:grid; grid-template-columns:0.8fr 1.2fr; gap:56px; align-items:flex-start; }
+  .booking-info h2{ font-size:2.1rem; color:var(--vert-foret-3); margin-bottom:18px; }
+  .booking-info p{ color:#5a5148; margin-bottom:24px; }
+  .info-item{ display:flex; gap:14px; margin-bottom:18px; align-items:flex-start; }
+  .info-item svg{ flex-shrink:0; margin-top:2px; }
+  .info-item strong{ display:block; color:var(--vert-foret-3); font-size:0.92rem; }
+  .info-item span{ font-size:0.88rem; color:#786f63; }
+
+  form.card{
+    background:var(--blanc); border-radius:22px; padding:40px; box-shadow:var(--ombre);
+  }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .field{ margin-bottom:20px; }
+  .field label{ display:block; font-size:0.82rem; font-weight:600; color:var(--vert-foret-3); margin-bottom:7px; }
+  .field input, .field select, .field textarea{
+    width:100%; padding:13px 15px; border-radius:10px; border:1.5px solid #e3dbcd;
+    font-family:'Work Sans'; font-size:0.94rem; background:var(--beige-clair); color:var(--texte);
+    transition:border-color .2s ease;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--vert-foret-2); background:var(--blanc);
+  }
+  .field textarea{ resize:vertical; min-height:80px; }
+  .submit-btn{ width:100%; justify-content:center; padding:15px; font-size:1rem; margin-top:6px; }
+
+  .confirm-box{
+    display:none; margin-top:20px; padding:18px 20px; border-radius:14px;
+    background:#eef4ee; border:1px solid #c9dccb; color:var(--vert-foret-3); font-size:0.9rem;
+  }
+  .confirm-box.show{ display:block; }
+  .confirm-box b{ display:block; margin-bottom:6px; }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--vert-foret-3); color:#e9e4d8; padding:64px 0 28px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:48px; }
+  footer .brand{ color:var(--blanc); margin-bottom:14px; }
+  footer p{ color:#c7c2b4; font-size:0.9rem; max-width:320px; }
+  footer h4{ font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px; color:#e9e4d8; }
+  footer ul{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+  footer ul a{ font-size:0.9rem; color:#c7c2b4; }
+  footer ul a:hover{ color:var(--blanc); }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; font-size:0.8rem; color:#a39d8d; text-align:center; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 880px){
+    nav{ display:none; position:absolute; top:100%; left:0; right:0; background:var(--beige-clair); box-shadow:var(--ombre); }
+    nav.open{ display:block; }
+    nav ul{ flex-direction:column; gap:0; padding:8px 24px 20px; }
+    nav ul li{ border-bottom:1px solid rgba(51,71,58,0.08); }
+    nav ul a{ display:block; padding:16px 0; }
+    .menu-toggle{ display:block; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-art{ height:220px; order:-1; }
+    .product-grid{ grid-template-columns:1fr 1fr; }
+    .booking-wrap{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .form-row{ grid-template-columns:1fr; }
+    .service-row{ flex-direction:column; align-items:flex-start; gap:8px;}
+    .service-price{ text-align:left; }
+  }
+  @media (max-width: 520px){
+    .product-grid{ grid-template-columns:1fr; }
+    section{ padding:64px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="#" class="brand">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C9 6 7 9 7 12.5C7 16.09 9.24 19 12 19C14.76 19 17 16.09 17 12.5C17 9 15 6 12 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      Sweet Lady
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">☰</button>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#reserver">Réserver</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="#reserver" class="btn" style="padding:11px 22px; font-size:0.85rem;">Réserver</a>
+  </div>
+</header>
+
+<section class="hero" id="accueil">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Massothérapie &amp; esthétique</p>
+      <h1>Un moment pour <em>vous</em>, au cœur du calme.</h1>
+      <p>Sweet Lady vous accueille dans un espace pensé pour ralentir le rythme. Massages, soins du visage et esthétique, dans une ambiance douce et naturelle.</p>
+      <div class="hero-cta">
+        <a href="#reserver" class="btn">Prendre rendez-vous</a>
+        <a href="#services" class="btn btn-outline">Voir les services</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 320 420" width="100%" height="100%">
+        <circle cx="160" cy="210" r="150" fill="#eec9c4" opacity="0.45"/>
+        <circle cx="200" cy="150" r="90" fill="#f4dedb" opacity="0.6"/>
+        <g stroke="#4f6b54" stroke-width="2.2" fill="none" stroke-linecap="round">
+          <path d="M160 340 C160 260 140 230 100 190"/>
+          <path d="M130 250 C110 240 95 235 78 238"/>
+          <path d="M145 210 C128 198 118 190 108 178"/>
+          <path d="M160 340 C160 260 180 220 220 180"/>
+          <path d="M190 240 C210 230 225 226 242 230"/>
+          <path d="M175 200 C192 188 202 180 212 168"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 28"><path d="M2 14 C 30 2, 50 26, 70 14 S 110 2, 138 14" fill="none" stroke="#4f6b54" stroke-width="1.4"/></svg>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="services-band">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Nos soins</p>
+      <h2>Services &amp; tarifs</h2>
+      <p>Exemples de services ci-dessous — remplace-les par ta liste réelle quand tu me l'enverras.</p>
+    </div>
+
+    <div class="service-tabs">
+      <button class="tab-btn active" data-tab="massage">Massothérapie</button>
+      <button class="tab-btn" data-tab="esthetique">Esthétique</button>
+      <button class="tab-btn" data-tab="forfaits">Forfaits</button>
+    </div>
+
+    <div class="service-group active" id="massage">
+      <div class="service-list">
+        <div class="service-row">
+          <div class="service-info"><h3>Massage suédois</h3><p>Détente profonde, pression douce à moyenne</p></div>
+          <div class="service-price"><div class="price">70 $</div><div class="duree">60 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Massage suédois</h3><p>Détente profonde, pression douce à moyenne</p></div>
+          <div class="service-price"><div class="price">95 $</div><div class="duree">90 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Massage thérapeutique</h3><p>Cible les tensions musculaires spécifiques</p></div>
+          <div class="service-price"><div class="price">85 $</div><div class="duree">60 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Massage aux pierres chaudes</h3><p>Chaleur enveloppante, relâchement musculaire</p></div>
+          <div class="service-price"><div class="price">100 $</div><div class="duree">75 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Massage prénatal</h3><p>Adapté à la grossesse, dès le 2e trimestre</p></div>
+          <div class="service-price"><div class="price">80 $</div><div class="duree">60 min</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-group" id="esthetique">
+      <div class="service-list">
+        <div class="service-row">
+          <div class="service-info"><h3>Soin du visage classique</h3><p>Nettoyage, exfoliation, masque, hydratation</p></div>
+          <div class="service-price"><div class="price">65 $</div><div class="duree">50 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Soin anti-âge</h3><p>Sérum ciblé, massage facial, LED</p></div>
+          <div class="service-price"><div class="price">95 $</div><div class="duree">70 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Épilation à la cire — jambes</h3><p>Cire douce, peau lisse et nette</p></div>
+          <div class="service-price"><div class="price">45 $</div><div class="duree">30 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Manucure</h3><p>Soin des mains et vernis régulier</p></div>
+          <div class="service-price"><div class="price">35 $</div><div class="duree">40 min</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Beauté du regard</h3><p>Teinture et rehaussement de cils</p></div>
+          <div class="service-price"><div class="price">55 $</div><div class="duree">45 min</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-group" id="forfaits">
+      <div class="service-list">
+        <div class="service-row">
+          <div class="service-info"><h3>Journée détente</h3><p>Massage 60 min + soin du visage + manucure</p></div>
+          <div class="service-price"><div class="price">165 $</div><div class="duree">2h30</div></div>
+        </div>
+        <div class="service-row">
+          <div class="service-info"><h3>Duo maman-fille</h3><p>Deux massages suédois 60 min côte à côte</p></div>
+          <div class="service-price"><div class="price">130 $</div><div class="duree">60 min</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 28"><path d="M2 14 C 30 26, 50 2, 70 14 S 110 26, 138 14" fill="none" stroke="#4f6b54" stroke-width="1.4"/></svg>
+</div>
+
+<!-- ============ PRODUITS ============ -->
+<section id="produits">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Boutique</p>
+      <h2>Produits en vente au salon</h2>
+      <p>Une sélection à emporter pour prolonger les soins à la maison.</p>
+    </div>
+    <div class="product-grid" id="productGrid">
+      <!-- généré par JS pour rester facile à modifier -->
+    </div>
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 140 28"><path d="M2 14 C 30 2, 50 26, 70 14 S 110 2, 138 14" fill="none" stroke="#4f6b54" stroke-width="1.4"/></svg>
+</div>
+
+<!-- ============ RÉSERVATION ============ -->
+<section class="booking" id="reserver">
+  <div class="container booking-wrap">
+    <div class="booking-info">
+      <p class="eyebrow">Rendez-vous</p>
+      <h2>Réserve ton moment</h2>
+      <p>Remplis le formulaire — la propriétaire reçoit un texto de confirmation dès que la demande est envoyée.</p>
+
+      <div class="info-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33473a" stroke-width="1.6"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <div><strong>Adresse</strong><span>404 boul. Laurette</span></div>
+      </div>
+      <div class="info-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33473a" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div><strong>Heures d'ouverture</strong><span>Lundi au vendredi, 10h à 15h/16h</span></div>
+      </div>
+      <div class="info-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33473a" stroke-width="1.6"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h3"/></svg>
+        <div><strong>Confirmation</strong><span>Un texto est envoyé automatiquement à la propriétaire</span></div>
+      </div>
+    </div>
+
+    <form class="card" id="bookingForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="nom">Nom complet</label>
+          <input type="text" id="nom" required placeholder="Ton nom">
+        </div>
+        <div class="field">
+          <label for="telephone">Téléphone</label>
+          <input type="tel" id="telephone" required placeholder="514 555-0000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="courriel">Courriel</label>
+        <input type="email" id="courriel" required placeholder="toi@exemple.com">
+      </div>
+
+      <div class="field">
+        <label for="service">Service souhaité</label>
+        <select id="service" required>
+          <option value="">Choisir un service…</option>
+          <option>Massage suédois (60 min) — 70 $</option>
+          <option>Massage suédois (90 min) — 95 $</option>
+          <option>Massage thérapeutique — 85 $</option>
+          <option>Massage aux pierres chaudes — 100 $</option>
+          <option>Massage prénatal — 80 $</option>
+          <option>Soin du visage classique — 65 $</option>
+          <option>Soin anti-âge — 95 $</option>
+          <option>Épilation à la cire — jambes — 45 $</option>
+          <option>Manucure — 35 $</option>
+          <option>Beauté du regard — 55 $</option>
+          <option>Journée détente (forfait) — 165 $</option>
+          <option>Duo maman-fille (forfait) — 130 $</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="date">Date</label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="field">
+          <label for="heure">Heure</label>
+          <select id="heure" required disabled>
+            <option value="">Choisir un service et une date…</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Notes (optionnel)</label>
+        <textarea id="message" placeholder="Allergies, préférences, première visite…"></textarea>
+      </div>
+
+      <button type="submit" class="btn submit-btn">Confirmer la demande de rendez-vous</button>
+
+      <div class="confirm-box" id="confirmBox">
+        <b>✓ Demande envoyée !</b>
+        <span id="confirmText"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">Sweet Lady</div>
+        <p>Salon de massothérapie et d'esthétique. Un espace calme pour prendre soin de soi.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#produits">Produits</a></li>
+          <li><a href="#reserver">Réserver</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>404 boul. Laurette</li>
+          <li>Lundi au vendredi, 10h à 15h/16h</li>
+          <li>À compléter : téléphone / courriel</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Sweet Lady — Tous droits réservés</div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Menu mobile ----------
+  const menuToggle = document.getElementById('menuToggle');
+  const mainNav = document.getElementById('mainNav');
+  menuToggle.addEventListener('click', () => mainNav.classList.toggle('open'));
+  document.querySelectorAll('#mainNav a').forEach(a => a.addEventListener('click', () => mainNav.classList.remove('open')));
+
+  // ---------- Onglets Services ----------
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.service-group').forEach(g => g.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ---------- Produits (facile à modifier ici) ----------
+  const produits = [
+    { nom: "Huile de massage relaxante", desc: "Mélange lavande et camomille", prix: "24 $" },
+    { nom: "Crème hydratante visage", desc: "Formule apaisante pour peaux sensibles", prix: "38 $" },
+    { nom: "Baume corporel karité", desc: "Nourrissant, parfum léger", prix: "22 $" },
+    { nom: "Sérum anti-âge", desc: "Vitamine C et acide hyaluronique", prix: "48 $" },
+    { nom: "Bougie de massage", desc: "Fond en huile chaude pour la peau", prix: "26 $" },
+    { nom: "Coffret cadeau détente", desc: "Huile + baume + bougie", prix: "68 $" },
+  ];
+  const grid = document.getElementById('productGrid');
+  produits.forEach(p => {
+    grid.innerHTML += `
+      <div class="product-card">
+        <div class="product-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#33473a" stroke-width="1.6"><path d="M12 2C9 6 7 9 7 12.5C7 16.09 9.24 19 12 19C14.76 19 17 16.09 17 12.5C17 9 15 6 12 2Z"/></svg>
+        </div>
+        <h3>${p.nom}</h3>
+        <p>${p.desc}</p>
+        <div class="price">${p.prix}</div>
+      </div>`;
+  });
+
+  // ---------- Réservation : appels au vrai backend (Google Calendar + Twilio) ----------
+  const form = document.getElementById('bookingForm');
+  const confirmBox = document.getElementById('confirmBox');
+  const confirmText = document.getElementById('confirmText');
+  const champService = document.getElementById('service');
+  const champDate = document.getElementById('date');
+  const champHeure = document.getElementById('heure');
+  const boutonSubmit = form.querySelector('.submit-btn');
+
+  // Empêche de choisir une date déjà passée
+  champDate.min = new Date().toISOString().split('T')[0];
+
+  async function rafraichirCreneaux() {
+    const service = champService.value;
+    const date = champDate.value;
+
+    champHeure.innerHTML = '<option value="">Chargement des disponibilités…</option>';
+    champHeure.disabled = true;
+
+    if (!service || !date) {
+      champHeure.innerHTML = '<option value="">Choisir un service et une date…</option>';
+      return;
+    }
+
+    try {
+      const url = `/api/creneaux?date=${encodeURIComponent(date)}&service=${encodeURIComponent(service)}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.erreur || 'Erreur inconnue');
+
+      if (data.creneaux.length === 0) {
+        champHeure.innerHTML = '<option value="">Aucun créneau libre ce jour-là</option>';
+        champHeure.disabled = true;
+        return;
+      }
+
+      champHeure.innerHTML = '<option value="">Choisir une heure…</option>' +
+        data.creneaux.map(h => `<option value="${h}">${h}</option>`).join('');
+      champHeure.disabled = false;
+    } catch (err) {
+      champHeure.innerHTML = '<option value="">Erreur de chargement — réessaie</option>';
+      console.error('Erreur /api/creneaux:', err);
+    }
+  }
+
+  champService.addEventListener('change', rafraichirCreneaux);
+  champDate.addEventListener('change', rafraichirCreneaux);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      nom: document.getElementById('nom').value,
+      telephone: document.getElementById('telephone').value,
+      courriel: document.getElementById('courriel').value,
+      service: champService.value,
+      date: champDate.value,
+      heure: champHeure.value,
+      message: document.getElementById('message').value,
+    };
+
+    boutonSubmit.disabled = true;
+    boutonSubmit.textContent = 'Envoi en cours…';
+    confirmBox.classList.remove('show');
+
+    try {
+      const res = await fetch('/api/reservation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        // Ex: créneau pris entre-temps par une autre cliente (code 409)
+        confirmText.textContent = data.erreur || "La réservation n'a pas pu être complétée.";
+        confirmBox.style.background = '#f7e8e6';
+        confirmBox.style.borderColor = '#e3b9b3';
+        confirmBox.classList.add('show');
+        if (data.creneauxDisponibles) await rafraichirCreneaux();
+        return;
+      }
+
+      const dateFormatee = new Date(payload.date + 'T' + payload.heure).toLocaleDateString('fr-CA', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+      confirmBox.style.background = '#eef4ee';
+      confirmBox.style.borderColor = '#c9dccb';
+      confirmText.textContent = `Merci ${payload.nom} ! Ton rendez-vous pour "${payload.service}" le ${dateFormatee} à ${payload.heure} est confirmé. La propriétaire vient d'être avisée par texto.`;
+      confirmBox.classList.add('show');
+      form.reset();
+      champHeure.innerHTML = '<option value="">Choisir un service et une date…</option>';
+      champHeure.disabled = true;
+    } catch (err) {
+      confirmText.textContent = 'Erreur réseau — vérifie ta connexion et réessaie.';
+      confirmBox.classList.add('show');
+      console.error('Erreur /api/reservation:', err);
+    } finally {
+      boutonSubmit.disabled = false;
+      boutonSubmit.textContent = 'Confirmer la demande de rendez-vous';
+    }
+  });
+</script>
+
+</body>
+</html>

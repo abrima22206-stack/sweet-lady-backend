@@ -1,0 +1,20 @@
+{
+  "name": "sweet-lady-backend",
+  "version": "1.0.0",
+  "description": "Backend de réservation pour le salon Sweet Lady — Google Calendar + Twilio SMS",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test:slots": "node tests/test-slots.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "googleapis": "^140.0.1",
+    "luxon": "^3.5.0",
+    "twilio": "^5.3.0"
+  }
+}
